@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>JSTEST</title>
+</head>
+<body>
+</body>
+<script>
+  // 关系数组转为树形结构
+  let toTreeFn = () => {
+    let source = 
+      [{
+          id: 1,
+          pid: 0,
+          name: 'body'
+      }, {
+          id: 2,
+          pid: 1,
+          name: 'title'
+      }, {
+          id: 3,
+          pid: 1,
+          name: 'div'
+      }, {
+          id: 4,
+          pid: 3,
+          name: 'span'
+      }, {
+          id: 5,
+          pid: 3,
+          name: 'icon'
+      }, {
+          id: 6,
+          pid: 4,
+          name: 'subspan'
+      }]
+
+    let toTree = (data) => {
+      let result = []
+      let obj = {}
+      
+      // 将数组每一项以唯一的id为字段名存入对象中
+      data.map(item => {
+        obj[item.id] = item
+      })
+
+      // 遍历数组，找出每一项对应的父id，并将子项push进父项的children属性里面
+      data.map(item => {
+        let parent = obj[item.pid]
+        if(parent) {
+          // 存在
+          if(parent.children) {
+            parent.children.push(item)
+          } else {
+            parent.children = []
+            parent.children.push(item)
+          }
+        } else {
+          // 不存在
+          result.push(item)
+        }
+      })
+
+      console.log(result);
+      return result
+    }
+
+    toTree(source)
+  }
+
+  // 手写deepCopy
+  let deepCopyFn = (data) => {
+
+    if (data instanceof Array) {
+
+      let arr = []
+
+      data.map(item => {
+        arr.push(deepCopyFn(item))
+      })
+
+      return arr
+
+    } else if (data instanceof Object) {
+
+      let obj = {}
+
+      Object.keys(data).map(item => {
+        obj[item] = deepCopyFn(data[item])
+      })
+
+      return obj
+      
+    } else {
+      return data
+    }
+  }
+</script>
+</html>
