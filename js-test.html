@@ -98,5 +98,27 @@
       return data
     }
   }
+
+  // bubble sort
+  let bubbleSort = () => {
+    let swap = (preIndex, nextIndex, arr) => {
+      let temp = arr[nextIndex]
+      arr[nextIndex] = arr[preIndex]
+      arr[preIndex] = temp
+    }
+
+    let arr = [5,4,3,2,1]
+    arr.map((item, index) => { //外层循环控制的轮数
+      arr.map((v, i) => {
+        // 第一个数与第二个数做比较
+        if(arr[i] > arr[i + 1]) {
+          // 交换
+          swap(i, i + 1, arr)
+        }
+      })
+    })
+    console.log(arr);
+    
+  }
 </script>
 </html>
