@@ -108,8 +108,8 @@
     }
 
     let arr = [5,4,3,2,1]
-    arr.map((item, index) => { //外层循环控制的轮数
-      arr.map((v, i) => {
+    arr.forEach((item, index) => { //外层循环控制的轮数
+      arr.forEach((v, i) => {
         // 第一个数与第二个数做比较
         if(arr[i] > arr[i + 1]) {
           // 交换
@@ -152,7 +152,7 @@
     ss1.push(1,2,3)
   }
 
-  // 'aabbbccccdddd' 计算该字符串出现次数最多的字符（抛出最先出现的）
+  // 'aabbbccccdddd' 计算该字符串出现次数最多的字符（抛出最先出现的）`
   const getMostTimes = (str) => {
     let arr = str.split('')
     
@@ -174,5 +174,7 @@
     max
     return max[0]
   }
+
+
 </script>
 </html>
