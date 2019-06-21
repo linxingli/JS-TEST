@@ -201,6 +201,7 @@
 
   }
 
+  // cehsi
   const test = () => {
     let source = 
       [{
@@ -234,7 +235,21 @@
         obj[item.id] = item
       })
 
-      console.log(obj);
+      let res = []
+
+      source.forEach(item => {
+        let parent = obj[item.pid]
+        if (parent) {
+          if (!parent.child) {
+            parent.child = []
+          }
+          parent.child.push(item)
+        } else {
+          res.push(parent)
+        }
+      })
+
+      console.log('obj..', obj)
       
   }
 
