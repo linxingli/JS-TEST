@@ -9,7 +9,7 @@
 <body>
 </body>
 <script>
-  // 关系数组转为树形结构
+  // 1.关系数组转为树形结构
   let toTreeFn = () => {
     let source = 
       [{
@@ -71,35 +71,26 @@
     toTree(source)
   }
 
-  // 手写deepCopy
+  // 2.手写deepCopy
   let deepCopyFn = (data) => {
-
     if (data instanceof Array) {
-
       let arr = []
-
       data.map(item => {
         arr.push(deepCopyFn(item))
       })
-
       return arr
-
     } else if (data instanceof Object) {
-
       let obj = {}
-
       Object.keys(data).map(item => {
         obj[item] = deepCopyFn(data[item])
       })
-
       return obj
-      
     } else {
       return data
     }
   }
 
-  // bubble sort
+  // 3.bubble sort
   let bubbleSort = () => {
     let swap = (preIndex, nextIndex, arr) => {
       let temp = arr[nextIndex]
@@ -121,7 +112,7 @@
     
   }
 
-  // switch 语句
+  // 4.switch 语句
   let switchLearn = (data) => {
     switch(data) {
       case 1:
@@ -137,7 +128,7 @@
     }
   }
 
-  // ES6 class
+  // 5.ES6 class
   let classLearn = () => {
     class Stack {
       constructor() {
@@ -152,28 +143,116 @@
     ss1.push(1,2,3)
   }
 
-  // 'aabbbccccdddd' 计算该字符串出现次数最多的字符（抛出最先出现的）`
-  const getMostTimes = (str) => {
-    let arr = str.split('')
-    
-    let obj = {}
-    arr.forEach(item => {
-      if (obj[item]) {
-        obj[item] ++
-      } else {
-        obj[item] = 1
-      }
-    })
+  // 6.按顺序运行的Promise
+  const promiseChain = () => {
+    /**
+      * 
+      * Runs promises from array of functions that can return promises
+      * in chained manner
+      *
+      * @param {array} arr - promise arr
+      * @return {Object} promise object
+    */
+    function runPromiseInSequence(arr, input) {
+      return arr.reduce(
+        (promiseChain, currentFunction) => promiseChain.then(currentFunction),
+        Promise.resolve(input)
+      );
+    }
 
-    let max = ['', 0]
-    Object.entries(obj).forEach(item => {
-      if (item[1] > max[1]) {
-        max = item
+    // promise function 1
+    function p1(a) {
+      return new Promise((resolve, reject) => {
+        resolve(a * 5);
+      });
+    }
+
+    // promise function 2
+    function p2(a) {
+      return new Promise((resolve, reject) => {
+        resolve(a * 2);
+      });
+    }
+
+    // function 3  - will be wrapped in a resolved promise by .then()
+    function f3(a) {
+    return a * 3;
+    }
+
+    // promise function 4
+    function p4(a) {
+      return new Promise((resolve, reject) => {
+        resolve(a * 4);
+      });
+    }
+
+    const promiseArr = [p1, p2, f3, p4];
+    runPromiseInSequence(promiseArr, 10)
+      .then(console.log);   // 1200
+
+  }
+
+  // 7.运行以下代码会alert多少次
+  const alertTimes = () => {
+
+
+    function test(a, b){
+      alert(b);
+      return {
+        test: function(c) {
+          return test(c,a);
+        }
       }
-    })
-    max
-    return max[0]
+    }
+
+    var a = test(100);a.test(101);a.test(102); // undefined 100 100
+    var b = test(200).test(201).test(202); // undefined 200 201
+    var c = test(300).test(301);c.test(302); // undefind 300 301
+
+
+  }
+
+  const createObj = () => {
+
+    // es5
+    function Person (name, age) {
+      let person = {
+        name: name,
+        age: age
+      }
+      return person
+    }
+
+    let p1 = new Person('p1', 17)
+
+    // es6
+    class Person1 {
+      constructor(name, age) {
+        this.name = name
+        this.age = age
+      }
+    }
+    let p2 = new Person1('p2', 16)
+
+    console.log('p1', p1);
+    console.log('p2', p2);
+    
+
+  }
+
+  const test = () => {
+
   }
 
 </script>
+
+<!-- 以下demo说明变量提升无法跨脚本 -->
+<script>
+  console.log('aaa', aaa);
+</script>
+
+<script>
+  var aaa = 'hello'
+</script>
+
 </html>
