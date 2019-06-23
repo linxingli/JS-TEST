@@ -212,36 +212,24 @@
 
   }
 
-  const createObj = () => {
-
-    // es5
-    function Person (name, age) {
-      let person = {
-        name: name,
-        age: age
-      }
-      return person
-    }
-
-    let p1 = new Person('p1', 17)
-
-    // es6
-    class Person1 {
+  // 8. factory func by ES6
+  const factoryEs6 = () => {
+    class Person {
       constructor(name, age) {
         this.name = name
         this.age = age
       }
     }
-    let p2 = new Person1('p2', 16)
 
-    console.log('p1', p1);
-    console.log('p2', p2);
+    class MakePerson {
+      genMethod (name, age) {
+        return new Person(name, age)
+      }
+    }
+
+    const makePerson = new MakePerson()
+    const mi = makePerson.genMethod('xiaomi', 9)
     
-
-  }
-
-  const test = () => {
-
   }
 
 </script>
