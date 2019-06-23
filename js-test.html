@@ -9,7 +9,7 @@
 <body>
 </body>
 <script>
-  // 关系数组转为树形结构
+  // 1.关系数组转为树形结构
   let toTreeFn = () => {
     let source = 
       [{
@@ -71,7 +71,7 @@
     toTree(source)
   }
 
-  // 手写deepCopy
+  // 2.手写deepCopy
   let deepCopyFn = (data) => {
 
     if (data instanceof Array) {
@@ -99,7 +99,7 @@
     }
   }
 
-  // bubble sort
+  // 3.bubble sort
   let bubbleSort = () => {
     let swap = (preIndex, nextIndex, arr) => {
       let temp = arr[nextIndex]
@@ -121,7 +121,7 @@
     
   }
 
-  // switch 语句
+  // 4.switch 语句
   let switchLearn = (data) => {
     switch(data) {
       case 1:
@@ -137,7 +137,7 @@
     }
   }
 
-  // ES6 class
+  // 5.ES6 class
   let classLearn = () => {
     class Stack {
       constructor() {
@@ -152,7 +152,7 @@
     ss1.push(1,2,3)
   }
 
-  // 按顺序运行的Promise
+  // 6.按顺序运行的Promise
   const promiseChain = () => {
     /**
       * 
@@ -201,56 +201,24 @@
 
   }
 
-  // cehsi
-  const test = () => {
-    let source = 
-      [{
-          id: 1,
-          pid: 0,
-          name: 'body'
-      }, {
-          id: 2,
-          pid: 1,
-          name: 'title'
-      }, {
-          id: 3,
-          pid: 1,
-          name: 'div'
-      }, {
-          id: 4,
-          pid: 3,
-          name: 'span'
-      }, {
-          id: 5,
-          pid: 3,
-          name: 'icon'
-      }, {
-          id: 6,
-          pid: 4,
-          name: 'subspan'
-      }]
+  // 7.运行以下代码会alert多少次
+  const alertTimes = () => {
 
-      let obj = {}
-      source.forEach(item => {
-        obj[item.id] = item
-      })
 
-      let res = []
-
-      source.forEach(item => {
-        let parent = obj[item.pid]
-        if (parent) {
-          if (!parent.child) {
-            parent.child = []
-          }
-          parent.child.push(item)
-        } else {
-          res.push(parent)
+    function test(a, b){
+      alert(b);
+      return {
+        test: function(c) {
+          return test(c,a);
         }
-      })
+      }
+    }
 
-      console.log('obj..', obj)
-      
+    var a = test(100);a.test(101);a.test(102); // undefined 100 100
+    var b = test(200).test(201).test(202); // undefined 200 201
+    var c = test(300).test(301);c.test(302); // undefind 300 301
+
+
   }
 
 </script>
