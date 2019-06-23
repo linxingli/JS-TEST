@@ -73,27 +73,18 @@
 
   // 2.手写deepCopy
   let deepCopyFn = (data) => {
-
     if (data instanceof Array) {
-
       let arr = []
-
       data.map(item => {
         arr.push(deepCopyFn(item))
       })
-
       return arr
-
     } else if (data instanceof Object) {
-
       let obj = {}
-
       Object.keys(data).map(item => {
         obj[item] = deepCopyFn(data[item])
       })
-
       return obj
-      
     } else {
       return data
     }
@@ -221,5 +212,48 @@
 
   }
 
+  const createObj = () => {
+
+    // es5
+    function Person (name, age) {
+      let person = {
+        name: name,
+        age: age
+      }
+      return person
+    }
+
+    let p1 = new Person('p1', 17)
+
+    // es6
+    class Person1 {
+      constructor(name, age) {
+        this.name = name
+        this.age = age
+      }
+    }
+    let p2 = new Person1('p2', 16)
+
+    console.log('p1', p1);
+    console.log('p2', p2);
+    
+
+  }
+
+  const test = () => {
+
+  }
+
+
 </script>
+
+<!-- 以下demo说明变量提升无法跨脚本 -->
+<script>
+  console.log('aaa', aaa);
+</script>
+
+<script>
+  var aaa = 'hello'
+</script>
+
 </html>
