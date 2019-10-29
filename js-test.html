@@ -1,47 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>JSTEST</title>
 </head>
+
 <body>
 </body>
 <script>
   // 1.关系数组转为树形结构
   let toTreeFn = () => {
-    let source = 
-      [{
-          id: 1,
-          pid: 0,
-          name: 'body'
-      }, {
-          id: 2,
-          pid: 1,
-          name: 'title'
-      }, {
-          id: 3,
-          pid: 1,
-          name: 'div'
-      }, {
-          id: 4,
-          pid: 3,
-          name: 'span'
-      }, {
-          id: 5,
-          pid: 3,
-          name: 'icon'
-      }, {
-          id: 6,
-          pid: 4,
-          name: 'subspan'
-      }]
+    let source = [{
+      id: 1,
+      pid: 0,
+      name: 'body'
+    }, {
+      id: 2,
+      pid: 1,
+      name: 'title'
+    }, {
+      id: 3,
+      pid: 1,
+      name: 'div'
+    }, {
+      id: 4,
+      pid: 3,
+      name: 'span'
+    }, {
+      id: 5,
+      pid: 3,
+      name: 'icon'
+    }, {
+      id: 6,
+      pid: 4,
+      name: 'subspan'
+    }]
 
     let toTree = (data) => {
       let result = []
       let obj = {}
-      
+
       // 将数组每一项以唯一的id为字段名存入对象中
       data.map(item => {
         obj[item.id] = item
@@ -50,9 +51,9 @@
       // 遍历数组，找出每一项对应的父id，并将子项push进父项的children属性里面
       data.map(item => {
         let parent = obj[item.pid]
-        if(parent) {
+        if (parent) {
           // 存在
-          if(parent.children) {
+          if (parent.children) {
             parent.children.push(item)
           } else {
             parent.children = []
@@ -98,23 +99,23 @@
       arr[preIndex] = temp
     }
 
-    let arr = [5,4,3,2,1]
+    let arr = [5, 4, 3, 2, 1]
     arr.forEach((item, index) => { //外层循环控制的轮数
       arr.forEach((v, i) => {
         // 第一个数与第二个数做比较
-        if(arr[i] > arr[i + 1]) {
+        if (arr[i] > arr[i + 1]) {
           // 交换
           swap(i, i + 1, arr)
         }
       })
     })
     console.log(arr);
-    
+
   }
 
   // 4.switch 语句
   let switchLearn = (data) => {
-    switch(data) {
+    switch (data) {
       case 1:
       case 2:
         console.log('1 or 2');
@@ -123,7 +124,7 @@
       case 4:
         console.log('3 or 4');
         break;
-      default: 
+      default:
         console.log('default!!!');
     }
   }
@@ -140,19 +141,19 @@
     }
     let ss1 = new Stack()
     let ss2 = new Stack()
-    ss1.push(1,2,3)
+    ss1.push(1, 2, 3)
   }
 
   // 6.按顺序运行的Promise
   const promiseChain = () => {
     /**
-      * 
-      * Runs promises from array of functions that can return promises
-      * in chained manner
-      *
-      * @param {array} arr - promise arr
-      * @return {Object} promise object
-    */
+     * 
+     * Runs promises from array of functions that can return promises
+     * in chained manner
+     *
+     * @param {array} arr - promise arr
+     * @return {Object} promise object
+     */
     function runPromiseInSequence(arr, input) {
       return arr.reduce(
         (promiseChain, currentFunction) => promiseChain.then(currentFunction),
@@ -176,7 +177,7 @@
 
     // function 3  - will be wrapped in a resolved promise by .then()
     function f3(a) {
-    return a * 3;
+      return a * 3;
     }
 
     // promise function 4
@@ -188,7 +189,7 @@
 
     const promiseArr = [p1, p2, f3, p4];
     runPromiseInSequence(promiseArr, 10)
-      .then(console.log);   // 1200
+      .then(console.log); // 1200
 
   }
 
@@ -196,26 +197,30 @@
   const alertTimes = () => {
 
 
-    function test(a, b){
+    function test(a, b) {
       alert(b);
       return {
-        test: function(c) {
-          return test(c,a);
+        test: function (c) {
+          return test(c, a);
         }
       }
     }
 
-    var a = test(100);a.test(101);a.test(102); // undefined 100 100
+    var a = test(100);
+    a.test(101);
+    a.test(102); // undefined 100 100
     var b = test(200).test(201).test(202); // undefined 200 201
-    var c = test(300).test(301);c.test(302); // undefind 300 301
+    var c = test(300).test(301);
+    c.test(302); // undefind 300 301
 
 
   }
 
+  // 8.es5和es6构造函数的区别
   const createObj = () => {
 
     // es5
-    function Person (name, age) {
+    function Person(name, age) {
       let person = {
         name: name,
         age: age
@@ -236,15 +241,45 @@
 
     console.log('p1', p1);
     console.log('p2', p2);
-    
-
   }
 
-  const test = () => {
-
+  // 9.用订阅-发布（观察者）模式，实现一个Even类的事件绑定、触发及解绑的功能
+  const Observer = () => {
+    class Event {
+      constructor() {
+        this.events = {}
+      }
+      // 事件绑定
+      on(type, callback) {
+        let fns = this.events[type] = this.events[type] || []
+        fns.push(callback)
+        return this
+      }
+      // 事件触发
+      trriger(type, data) {
+        let fns = this.events[type]
+        fns.forEach(fn => {
+          fn(data)
+        })
+        return this
+      }
+      // 事件解绑
+      off(type, callback) {
+        let fns = this.events[type]
+        if (callback) {
+          let index = fns.indexof(callback)
+          fns.splice(1, index)
+        } else {
+          fns.length = 0
+          // fns = [] 这种写法不能成功清除原数组的原因：
+          // fns = []; 与 fns.length = 0; 区别
+          // fns=[] 创建一个新的数组，并将对它的引用分配给变量。任何其他引用不受影响，但仍指向原始数组
+          // fns.length = 0 修改数组本身。如果通过不同的变量访问它，那么仍然可以获得修改后的数组
+        }
+        return this
+      }
+    }
   }
-
-
 </script>
 
 <!-- 以下demo说明变量提升无法跨脚本 -->
