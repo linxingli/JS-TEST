@@ -92,9 +92,34 @@ function Find (target, array) {
 }
 
 //测试用例
-console.log(Find(10, [
-  [1, 2, 3, 4],
-  [5, 9, 10, 11],
-  [13, 20, 21, 23]
-])
-);
+// console.log(Find(10, [
+//   [1, 2, 3, 4],
+//   [5, 9, 10, 11],
+//   [13, 20, 21, 23]
+// ])
+// );
+
+
+// 简易的二分查找 
+let count = 0;
+function binarySearch (arr, target, start, end) {
+  count++
+  start = start || 0
+  end = end || arr.length - 1
+  let midInx = Math.floor((start + end) / 2)
+  if (target < arr[midInx] && start < midInx) {
+    binarySearch(arr, target, start, midInx)
+  } else if (target > arr[midInx] && midInx < end) {
+    binarySearch(arr, target, midInx + 1, end)
+  } else if (target === arr[midInx]) {
+    console.log('存在', count)
+  } else {
+    console.log('不存在', count)
+  }
+};
+let arr = Array.from({
+  length: 10000000
+}).map((v, i) => {
+  return i + 1
+})
+binarySearch(arr, 5000000)
