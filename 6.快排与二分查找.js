@@ -117,6 +117,8 @@ function binarySearch (arr, target, start, end) {
     console.log('不存在', count)
   }
 };
+
+// 快速生成一个确定数量的数组
 let arr = Array.from({
   length: 10000000
 }).map((v, i) => {
