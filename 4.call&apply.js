@@ -11,10 +11,10 @@ arr.pop = () => {
 let a1 = [1, 2, 3]
 
 // 使用call调用
-arr.pop.call(a1)
-console.log('a1:', a1);
-[].pop.call(a1)
-console.log('a1:', a1);
+arr.pop.call(a1);
+// console.log('a1:', a1);
+[].pop.call(a1);
+// console.log('a1:', a1);
 
 
 arr.push = () => {
@@ -22,10 +22,10 @@ arr.push = () => {
 }
 
 // 使用apply调用
-arr.push.apply(a1, [7, 8, 9])
-console.log('a1:', a1);
-[].push.apply(a1, [7, 8, 9])
-console.log('a1:', a1);
+arr.push.apply(a1, [7, 8, 9]);
+// console.log('a1:', a1);
+[].push.apply(a1, [7, 8, 9]);
+// console.log('a1:', a1);
 
 let aa = {
   '1': 1,
@@ -35,4 +35,4 @@ let aa = {
 
 [].pop.call(aa);
 [].push.apply(aa, [4, 5, 6]);
-console.log('aa:', aa);
+// console.log('aa:', aa);

@@ -18,6 +18,8 @@ Array.prototype.flat = function () {
 }
 
 
+
+// 以下代码在浏览器环境和node环境执行顺序不一致
 setTimeout(() => {
   console.log('time1');
   Promise.resolve().then(() => {
@@ -31,3 +33,28 @@ setTimeout(() => {
     console.log('p2');
   })
 }, 1000)
+
+
+// 示例1 仅浏览器出效果
+function add (a) {
+  function sum (b) { // 使用闭包
+    a = b ? a + b : a; // 累加
+    return sum;
+  }
+  sum.toString = function () { // 只在最后一次调用
+    return a;
+  }
+  return sum; // 返回一个函数 因为输出的时候要转成字符串，所以调用toString
+}
+add(1)
+
+// 示例2
+let fnn = (data) => {
+  fnn.toString = () => {
+    console.log('toString111')
+  }
+  return fnn
+}
+
+fnn(111)
+
