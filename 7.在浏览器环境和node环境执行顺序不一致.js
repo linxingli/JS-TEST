@@ -19,7 +19,7 @@ Array.prototype.flat = function () {
 
 
 
-// 以下代码在浏览器环境和node环境（node version<10）执行顺序不一致
+// 以下代码在浏览器环境和node环境（node version<11）执行顺序不一致
 setTimeout(() => {
   console.log('time1');
   Promise.resolve().then(() => {
@@ -36,8 +36,8 @@ setTimeout(() => {
 
 
 // 示例1 仅浏览器出效果
-function add(a) {
-  function sum(b) { // 使用闭包
+function add (a) {
+  function sum (b) { // 使用闭包
     a = b ? a + b : a; // 累加
     return sum;
   }
